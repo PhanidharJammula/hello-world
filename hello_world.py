@@ -1,2 +1,2 @@
-# test hello world
+print("=== TEST ===")
 print("HELLO WORLD")
