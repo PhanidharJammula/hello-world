@@ -1,2 +1,2 @@
-print("=== TEST ===")
+print("=== TEST pipeline ===")
 print("HELLO WORLD")
