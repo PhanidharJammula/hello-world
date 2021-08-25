@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+  environment {
+    PRE_PROD_INVENTORY = "aws_preprod"
+    STAGING_INVENTORY = "aws_staging"
+    PRE_PROD_BRANCH = /^release\/.*/
+    STAGING_BRANCH = "integration"
+    INVENTORY_NAME = """${
+      BRANCH_NAME ==~ PRE_PROD_BRANCH ? PRE_PROD_INVENTORY : BRANCH_NAME == STAGING_BRANCH ? STAGING_INVENTORY : 'Unknown'
+    }"""
+    TAG_NAME = """${
+      BRANCH_NAME ==~ PRE_PROD_BRANCH ? 'preprod' : 'staging'
+    }"""
+    BUILD_ENV = """${	
+      BRANCH_NAME ==~ PRE_PROD_BRANCH ? 'preprod' : 	
+      BRANCH_NAME == STAGING_BRANCH ? 'staging' : 'production'	
+    }"""
+  }
+  stages {
+    stage('Create Docker Image') {
+      steps {
+        echo "The branch: ${BRANCH_NAME} and the build ${BUILD_NUMBER}"
+        sh """
+          sudo python hello_world.py
+        """
+      }
+    }
+  }
+}
