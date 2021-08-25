@@ -19,7 +19,7 @@ pipeline {
   stages {
     stage('Create Docker Image') {
       steps {
-        echo "The branch: ${BRANCH_NAME} and the build ${BUILD_NUMBER}"
+        echo "test The branch: ${BRANCH_NAME} and the build ${BUILD_NUMBER}"
         sh """
           sudo python hello_world.py
         """
