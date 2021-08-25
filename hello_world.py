@@ -1,4 +1,2 @@
-print("TESSSST")
-print("integartion pipeline")
+print("test hello world")
 print("HELLO WORLD")
-print("=========== SUCCESS ===================")
